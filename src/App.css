@@ -177,6 +177,12 @@ p {
     font-size: 12px;
     color: rgba(203,189,184,0.7);
 }
+.weather_area .control {
+    margin-top: 40px;
+}
+.weather_area .control button{
+ margin-top: 10px;
+}
 .weather {
     overflow: hidden;
     border-radius: 5px;
@@ -194,6 +200,7 @@ p {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    min-height: 108px;
     padding: 20px 15px;
     color: #303030;
 }
@@ -232,6 +239,29 @@ p {
     content: ' °F';
 }
 
+.loader {
+    width: 48px;
+    height: 48px;
+    border: 3px solid #FFF;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+.loader::after {
+    content: '';  
+    box-sizing: border-box;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: #488eff;
+    width: 16px;
+    height: 16px;
+    transform: translate(-50%, 50%);
+    border-radius: 50%;
+}
+
 @media screen and (max-width: 768px) {
     .main_title {
         font-size: 35px;
@@ -257,7 +287,9 @@ p {
         right: 2px;
         bottom: -22px;
     }
-
+    .weather_area .control {
+        margin-top: 20px;
+    }
 }
 
 @keyframes winnerAction {
@@ -284,3 +316,12 @@ p {
         transform: rotate(-1deg) scale(1.01);
     }
 }
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+} 

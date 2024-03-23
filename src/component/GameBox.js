@@ -4,7 +4,6 @@ import ImgScissor from '../assets/images/scissor.png';
 import ImgPaper from '../assets/images/paper.png';
 
 const GameBox = ({title, state="rock", result="", position=""}) => {
-  console.log(result)
   let altTxt = state;
 
   if(state === "rock") {

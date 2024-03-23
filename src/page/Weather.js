@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import WeatherButton from '../component/WeatherButton';
+import WeatherBox from '../component/WeatherBox';
 
 const Weather = () => {
     // 1. 앱이 실행되자마자 현재위치기반의 날씨가 보인다.
@@ -9,32 +11,35 @@ const Weather = () => {
     // 6. 데이터를 들고오는 동안 로딩 스피너가 돈다.
     // 0235571f80ab4a3bbaf3f81020f0c8ac
     const APIKey = '0235571f80ab4a3bbaf3f81020f0c8ac';
+    const API = `https://api.openweathermap.org/data/2.5/weather?`;
     const [fahrenheit, setFahrenheit] = useState(0);
     const [weatherData, setWeatherData] = useState(null);
+    const [location, setLocation] = useState('');
+    const [loading, setLoading] = useState(false);
     
 
 
     const getCurrentLocation = () => {
-        console.log("getCurrentLocation");
         navigator.geolocation.getCurrentPosition(locationPosition);
     }
 
     const locationPosition = (position) => {
         let latitude = position.coords.latitude;
         let longitude = position.coords.longitude;
-        console.log(latitude,longitude)
         apiData(latitude,longitude)
         
     }
 
     const apiData = async(lat,lon) => {
-        const API = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${APIKey}&units=metric`;
+        const weatherApi = `${API}lat=${lat}&lon=${lon}&appid=${APIKey}&units=metric`;
+        setLoading(true)
         try {
-            const result = await fetch(API);
-            const data = await result.json();
+            let result = await fetch(weatherApi);
+            let data = await result.json();
             setWeatherData(data)
             tempConvert(data.main.temp)
-            console.log(data)
+            setLocation(data.name)
+            setLoading(false)
         } catch {
             console.log("실패")
         }
@@ -45,6 +50,24 @@ const Weather = () => {
         setFahrenheit(fahrenheit.toFixed(2));
     }
 
+    const getLocationName = (city) => {
+        getLocationData(city);
+    }
+
+    const getLocationData = async(city) => {
+        const cityWeatherApi = `${API}q=${city}&appid=${APIKey}&units=metric`;
+        setLoading(true)
+        try {
+            let result = await fetch(cityWeatherApi);
+            let data = await result.json();
+            setWeatherData(data)
+            tempConvert(data.main.temp)
+            setLoading(false)
+        } catch {
+            console.log("실패")
+        }
+    }
+
     useEffect(() => {
         getCurrentLocation();
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -53,21 +76,8 @@ const Weather = () => {
   return (
     <div className='weather_area content'>
         <h1 className='main_title'>오늘의 날씨</h1>
-        <div className='weather'>
-            <div className='img'>
-                {weatherData && <img src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@4x.png`} alt={weatherData?.weather[0].description}/>}
-            </div>
-            <div className='txt'>
-                <div className='info'>
-                    <strong className='city'>{weatherData?.name}</strong>
-                    <p className='description'>{weatherData?.weather[0].description}</p>
-                </div>
-                <div className='num'>
-                    <p className='temp'>{weatherData?.main.temp}</p>
-                    <p className='fahrenheit'>{fahrenheit}</p>
-                </div>
-            </div>
-        </div>
+        <WeatherBox weatherData={weatherData} fahrenheit={fahrenheit} loading={loading}/>
+        <WeatherButton location={location} getLocationName={getLocationName}/>
     </div>
   )
 }
