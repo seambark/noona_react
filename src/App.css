@@ -27,6 +27,7 @@ p {
     left: 0;
     bottom: 0;
     width: 100%;
+    z-index: 100;
 }
 .menu ul {
     display: flex;
@@ -59,6 +60,7 @@ p {
     height: 100%;
     margin: 0 auto;
     padding: 35px 20px 30px;
+    overflow-y: auto;
 }
 .content.weather_area {
     max-width: 620px;
