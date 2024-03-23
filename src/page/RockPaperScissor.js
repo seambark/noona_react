@@ -35,8 +35,8 @@ const RockPaperScissor = () => {
   }
 
   return (
-    <div className='game_area'>
-      <h1 className='game_title'>가위바위보 게임</h1>
+    <div className='game_area content'>
+      <h1 className='main_title'>가위바위보 게임</h1>
         <div className='game'>
           <GameBox title="You" position='left' state={userState} result={userResult}/>
           <GameBox title="Computer" position='right' state={computerState} result={userResult !== '' && (userResult === 'tie'? userResult : (userResult === 'winner'? 'loser': 'winner'))}/>

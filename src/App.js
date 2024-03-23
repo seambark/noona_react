@@ -1,5 +1,9 @@
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import Menu from './component/Menu';
+import Weather from './page/Weather';
 import RockPaperScissor from './page/RockPaperScissor';
+
 
 function App() {
 
@@ -11,8 +15,12 @@ function App() {
   // 6. 박스 테두기가 결과에 따라 색이 변한다. 기면 빨간색, 이기면 초록색, 비기면 검정색이 보인다.
 
   return (
-    <div>
-      <RockPaperScissor />
+    <div className='wrap'>
+      <Menu />
+      <Routes>
+        <Route path='/' element={<Weather />}/>
+        <Route path='/page/RockPaperScissor' element={<RockPaperScissor />}/>
+      </Routes>
     </div>
   );
 }
