@@ -16,7 +16,8 @@ const Weather = () => {
     const [weatherData, setWeatherData] = useState(null);
     const [location, setLocation] = useState('');
     const [loading, setLoading] = useState(false);
-    
+    const [apiError, setApiError] = useState('');
+
 
 
     const getCurrentLocation = () => {
@@ -40,8 +41,10 @@ const Weather = () => {
             tempConvert(data.main.temp)
             setLocation(data.name)
             setLoading(false)
-        } catch {
+        } catch(err) {
             console.log("실패")
+            setLoading(false)
+            setApiError(err.message)
         }
     }
 
@@ -63,8 +66,10 @@ const Weather = () => {
             setWeatherData(data)
             tempConvert(data.main.temp)
             setLoading(false)
-        } catch {
+        } catch(err) {
             console.log("실패")
+            setLoading(false)
+            setApiError(err.message)
         }
     }
 
@@ -76,8 +81,13 @@ const Weather = () => {
   return (
     <div className='weather_area content'>
         <h1 className='main_title'>오늘의 날씨</h1>
-        <WeatherBox weatherData={weatherData} fahrenheit={fahrenheit} loading={loading}/>
-        <WeatherButton location={location} getLocationName={getLocationName}/>
+        {!apiError ? (
+            <>
+            <WeatherBox weatherData={weatherData} fahrenheit={fahrenheit} loading={loading}/>
+            <WeatherButton location={location} getLocationName={getLocationName}/>
+            </>
+            ): (<p className='err_message'>{apiError}</p>)
+        }
     </div>
   )
 }

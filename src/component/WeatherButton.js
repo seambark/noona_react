@@ -1,17 +1,22 @@
-import React from 'react'
+import React, {useState} from 'react'
 
 const WeatherButton = ({getLocationName, location}) => {
+  const cityList = ['seoul', 'london', 'hong kong', 'dubai'];
+  const [city, setCity] = useState('');
+
   const locationWeather = (e) => {
       getLocationName(e)
+      setCity(e)
   }
 
   return (
     <div className='control'>
-        <button type='button' onClick={() => locationWeather(location)}>Current Location</button>
-        <button type='button' onClick={() => locationWeather('seoul')}>Seoul</button>
-        <button type='button' onClick={() => locationWeather('london')}>London</button>
-        <button type='button' onClick={() => locationWeather('hong kong')}>Hong kong</button>
-        <button type='button' onClick={() => locationWeather('dubai')}>Dubai</button>
+      <button type='button' className={city === '' || city === location ? "active" : ""} onClick={() => locationWeather(location)}>Current Location</button>
+      {cityList.map((item, idx) => {
+        return (
+          <button key={idx} type='button' className={city === item ? "active" : ""} onClick={() => locationWeather(item)}>{item}</button>
+        )
+      })}
     </div>
   )
 }
