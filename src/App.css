@@ -20,8 +20,11 @@ p {
 .wrap {
     position: relative;
     height: 100%;
-    min-width: 360px;
+    /* min-width: 360px; */
+}
+.fix_menu {
     padding-bottom: 67px;
+    height: 100%;
 }
 .menu {
     position: fixed;
@@ -33,7 +36,8 @@ p {
 }
 .menu ul {
     display: flex;
-    
+    margin: 0;
+    padding: 0;
 }
 .menu ul li {
     flex-grow: 1;
@@ -278,6 +282,26 @@ p {
     color: #cbbdb8;
     font-weight: bold;
     text-align: center;
+}
+
+.project_area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.project_area button {
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin: 0 5px;
+    border: 0;
+    color: #fff;
+}
+.project_area button:first-child {
+    background-color: #488eff;
+}
+.project_area button:last-child {
+    background-color: #ff487f;
 }
 
 @media screen and (max-width: 768px) {

@@ -1,8 +1,15 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import Menu from './component/Menu';
 import Weather from './page/Weather';
 import RockPaperScissor from './page/RockPaperScissor';
+import ProductAll from './homepage/page/ProductAll';
+import Login from './homepage/page/Login';
+import ProductDetail from './homepage/page/ProductDetail';
+import Main from './homepage/Main';
+import WeatherAndGame from './page/WeatherAndGame';
+import IndexPage from './page/IndexPage';
+import { useEffect, useState } from 'react';
+
 
 
 function App() {
@@ -13,13 +20,26 @@ function App() {
   // 4. 버튼을 클릭하면 컴퓨터 아이템은 랜덤하게 선택이 된다.
   // 5. 3번 4번의 아이템을 가지고 누가 이겼는지 승패를 나눈다.
   // 6. 박스 테두기가 결과에 따라 색이 변한다. 기면 빨간색, 이기면 초록색, 비기면 검정색이 보인다.
+  const [authenticate, setAuthenticate] = useState(false);
+
+  useEffect(() => {
+    console.log('로그인', authenticate)
+  },[authenticate])
 
   return (
     <div className='wrap'>
-      <Menu />
       <Routes>
-        <Route path='/' element={<Weather />}/>
-        <Route path='/page/RockPaperScissor' element={<RockPaperScissor />}/>
+        <Route path='/' element={<IndexPage />} />
+        <Route path='/weather&game' element={<WeatherAndGame />}>
+          <Route path='/weather&game/weather' element={<Weather />}/>
+          <Route path='/weather&game/RockPaperScissor' element={<RockPaperScissor />}/>
+        </Route>
+        
+        <Route path='/h&m' element={<Main />}>
+          <Route path='/h&m/productAll' element={<ProductAll />}/>
+          <Route path='/h&m/login' element={<Login setAuthenticate={setAuthenticate}/>} />
+          <Route path='/h&m/product/:id' element={<ProductDetail />} />
+        </Route>
       </Routes>
     </div>
   );

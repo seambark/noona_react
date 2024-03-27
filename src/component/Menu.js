@@ -5,11 +5,11 @@ const Menu = () => {
     const menuList = [
         {
             menu: '날씨',
-            link: '/'
+            link: '/weather&game/weather'
         },
         {
             menu: '게임',
-            link: '/page/RockPaperScissor'
+            link: '/weather&game/RockPaperScissor'
         }
     ];
 
