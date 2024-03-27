@@ -29,6 +29,10 @@ p {
 .menu_btn {
     display: none;
 }
+button.login_btn {
+    border:0;
+    background-color: transparent;
+}
 .login_btn {
     color: #474747;
     text-decoration: none;
@@ -40,14 +44,16 @@ p {
     position: relative;
     display: flex;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 25px;
 }
 .menu_list ul {
     display: flex;
     margin-bottom: 0;
 }
 .menu_list ul li {
-    padding: 5px;
+    padding: 5px 10px;
+    font-weight: bold;
+    color: #353535;
 }
 .search_box {
     position: absolute;
@@ -85,6 +91,9 @@ p {
     border-radius: 5px;
     overflow: hidden;
 }
+.item a {
+    text-decoration: none;
+}
 .item .img img {
     width: 100%;
 }
@@ -96,6 +105,7 @@ p {
 }
 .item .info .title {
     margin-bottom: 10px;
+    color: #474747;
     font-size: 18px;
     font-weight: bold;
 }
@@ -103,6 +113,7 @@ p {
     color: #939393;
     text-align: right;
 }
+
 .item .tag {
     position: absolute;
     top:0;
@@ -110,6 +121,7 @@ p {
     display: flex;
     padding: 10px 10px;
 }
+.detail .tag span,
 .item .tag span {
     margin-right: 5px;
     padding: 1px 5px;
@@ -117,9 +129,11 @@ p {
     color:#fff;
     font-size: 12px;
 }
+.detail .tag .choice,
 .item .tag .choice {
     background-color: rgba(205,1,24,0.8);
 }
+.detail .tag .new,
 .item .tag .new {
     background-color: rgba(109,165,144,0.8)
 }
@@ -127,7 +141,48 @@ p {
     width: 350px;
     margin: 0 auto;
 }
-
+.detail .tag {
+    margin-bottom: 15px;
+}
+.detail .tag span{
+    padding: 3px 5px;
+}
+.detail .img img {
+width: 100%;
+}
+.detail .info {
+    padding: 1.5rem 0 1.5rem 1.5rem;
+}
+.detail .title {
+    font-size: 30px;
+}
+.detail .price {
+    color: #939393;
+    font-size: 20px;
+    text-align: right;
+}
+.detail .button_box {
+    text-align: right;
+}
+.detail .button_box button{
+    width: 100%;
+}
+.no_data {
+    padding: 55px 20px 30px;
+    text-align: center;
+}
+.section .loader{
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 70px;
+    height: 70px;
+    border: 6px solid #e8e8e8;
+}
+.section .loader::after {
+    background-color: #cd0118;
+}
 
 @media screen and (max-width: 1199px) {
     .homepage_wrap {
@@ -264,5 +319,8 @@ p {
     }
     .item:hover {
         transform: inherit;
+    }
+    .detail .info {
+        padding: 1.5rem 1.5rem;
     }
 }

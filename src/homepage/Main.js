@@ -1,13 +1,12 @@
-import React from 'react';
 import Navbar from './component/Navbar';
 import { Outlet } from 'react-router-dom';
-// eslint-disable-next-line
 import '../assets/css/homepage.css';
 
-const main = () => {
+const Main = ({authenticate, setAuthenticate}) => {
+
   return (
     <div className='homepage_wrap'>
-      <Navbar />
+      <Navbar authenticate={authenticate} setAuthenticate={setAuthenticate}/>
       <div className='section'>
         <Outlet />
       </div>
@@ -15,4 +14,4 @@ const main = () => {
   )
 }
 
-export default main
+export default Main

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import ProductCard from '../component/ProductCard';
 import { Col, Container, Row } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useSearchParams } from 'react-router-dom';
+import Loading from '../../component/Loading';
 
 // 1. 전체상품페이지, 로그인, 상품상세페이지
 // 1-1. 네비게이션 바
@@ -14,27 +16,43 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const ProductAll = () => {
   const [productList, setProductList] = useState([]);
+  // eslint-disable-next-line
+  const [query, setQuery] = useSearchParams();
+  const [loading, setLoading] = useState(false);
 
-  const  getProducts = async() => {
-    let url = `https://my-json-server.typicode.com/seambark/noona_react/products`;
-    let response = await fetch(url);
-    let data = await response.json();
+  const getProducts = async() => {
+    setLoading(true)
+    let searchQuery = query.get('q')||'';
+    let url = `https://my-json-server.typicode.com/seambark/noona_react/products?q=${searchQuery}`;
+    try {
+      let response = await fetch(url);
+      let data = await response.json();
+      setProductList(data)
+      setLoading(false)
 
-    setProductList(data)
+    } catch(err) {
+      console.log('실패')
+    }
+    
   }
 
   useEffect(() => {
     getProducts();
-  },[]);
+    // eslint-disable-next-line
+  },[query]);
 
   return (
     <Container>
       <Row>
-      {productList.map((menu) => (
-        <Col lg={3}>
+      {productList.length > 0 ? (
+        productList.map((menu, idx) => (
+        <Col lg={3} key={idx}>
           <ProductCard item={menu}/>
         </Col>
-      ))}
+      ))):(
+        loading === true? <Loading />:
+        <p className='no_data'>{query?.get('q')} 상품이 없습니다.</p>
+      )}
       </Row>
     </Container>
   )

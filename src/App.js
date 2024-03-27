@@ -4,11 +4,11 @@ import Weather from './page/Weather';
 import RockPaperScissor from './page/RockPaperScissor';
 import ProductAll from './homepage/page/ProductAll';
 import Login from './homepage/page/Login';
-import ProductDetail from './homepage/page/ProductDetail';
 import Main from './homepage/Main';
 import WeatherAndGame from './page/WeatherAndGame';
 import IndexPage from './page/IndexPage';
 import { useEffect, useState } from 'react';
+import PrivateRoutes from './homepage/route/PrivateRoutes';
 
 
 
@@ -23,7 +23,6 @@ function App() {
   const [authenticate, setAuthenticate] = useState(false);
 
   useEffect(() => {
-    console.log('로그인', authenticate)
   },[authenticate])
 
   return (
@@ -34,15 +33,14 @@ function App() {
           <Route path='/weather&game/weather' element={<Weather />}/>
           <Route path='/weather&game/RockPaperScissor' element={<RockPaperScissor />}/>
         </Route>
-        
-        <Route path='/h&m' element={<Main />}>
+        <Route path='/h&m' element={<Main authenticate={authenticate} setAuthenticate={setAuthenticate}/>}>
           <Route path='/h&m/productAll' element={<ProductAll />}/>
           <Route path='/h&m/login' element={<Login setAuthenticate={setAuthenticate}/>} />
-          <Route path='/h&m/product/:id' element={<ProductDetail />} />
+          <Route path='/h&m/product/:id' element={<PrivateRoutes authenticate={authenticate}/>} />
         </Route>
       </Routes>
     </div>
   );
 }
 
-export default App;
+export default App

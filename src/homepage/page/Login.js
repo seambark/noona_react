@@ -13,8 +13,8 @@ const Login = ({setAuthenticate}) => {
   };
 
   return (
-    <div className='login_area d-grid'>
-      <Form onSubmit={(e) => loginUser(e)}>
+    <div className='login_area'>
+      <Form onSubmit={(e) => loginUser(e)} className='d-grid'>
         <Form.Group className="mb-3" controlId="email">
           <Form.Label>Email address</Form.Label>
           <Form.Control type="email" placeholder="name@example.com" />

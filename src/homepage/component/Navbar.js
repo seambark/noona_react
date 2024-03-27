@@ -1,28 +1,49 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
 import { faMagnifyingGlass, faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
 import logoImg from '../../assets/images/hm-logo.png';
 
-const Navbar = () => {
+const Navbar = ({authenticate, setAuthenticate}) => {
     const menuList = ['여성','Divided','남성','신생아/유아','아동','H&M HOME','Sale','지속가능성'];
     const [menuActive, setMenuActive] = useState(false);
     const [searchActive, setSearchActive] = useState(false);
-    
+    const navigate = useNavigate();
+
     const menuClick = () => {
         menuActive === false ? setMenuActive(true) : setMenuActive(false);
     }
     const searchClick = () => {
         searchActive === false ? setSearchActive(true) : setSearchActive(false);
     }
+
+    const handleOnKeyPress = (e) => {
+        let inputValue = e.target.value;
+
+        if (e.key === 'Enter') {
+            navigate(`/h&m/productAll?q=${inputValue}`);
+        }
+    }
+    const logoutClick = () => {
+        setAuthenticate(false)
+    }
+
     return (
     <header className='header'>
         <div className='unit_area'>
-            <Link to='/h&m/login' className='login_btn'>
-                <FontAwesomeIcon icon={faUser} />
-                <span>로그인</span>
-            </Link>
+            {authenticate === false?(
+                <Link to='/h&m/login' className='login_btn'>
+                    <FontAwesomeIcon icon={faUser} />
+                    <span>로그인</span>
+                </Link>
+            ):(
+                <button type='button' className='login_btn' onClick={() => logoutClick()}>
+                    <FontAwesomeIcon icon={faUser} />
+                    <span>로그아웃</span>
+                </button>
+            )}
+            
         </div>
         <div>
             <h1 className='logo'>
@@ -40,8 +61,8 @@ const Navbar = () => {
             </button>
             <nav className={`menu_list ${menuActive !== false?'active':''}`}>
                 <ul>
-                    {menuList.map((menu) => {
-                        return (<li>{menu}</li>)
+                    {menuList.map((menu, idx) => {
+                        return (<li key={idx}>{menu}</li>)
                     })}
                 </ul>
                 <button type='button' className='close_btn' onClick={() => menuClick()}>
@@ -51,7 +72,7 @@ const Navbar = () => {
             <div className={`search_box ${searchActive !== false?'active':''}`}>
                 <span className='search_input'>
                     <FontAwesomeIcon icon={faMagnifyingGlass} />
-                    <input type='search' placeholder='제품검색'/>
+                    <input type='search' placeholder='제품검색' onKeyUp={(e) => handleOnKeyPress(e)}/>
                 </span>
             </div>
         </div>
