@@ -323,4 +323,7 @@ width: 100%;
     .detail .info {
         padding: 1.5rem 1.5rem;
     }
+    .section .loader{
+        left: 40%;
+    }
 }

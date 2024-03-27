@@ -2,17 +2,26 @@ import React, { useEffect, useState } from 'react'
 import { Container, Row, Col, Form } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
+import Loading from '../../component/Loading';
 
 const ProductDetail = () => {
   let {id} = useParams();
   const [detail, setDetail] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const getProductDetail = async() => {
+    setLoading(true)
     let url = `https://my-json-server.typicode.com/seambark/noona_react/products/${id}`;
-    let response = await fetch(url);
-    let data = await response.json();
-
-    setDetail(data)
+    
+    try {
+      let response = await fetch(url);
+      let data = await response.json();
+      setDetail(data)
+      setLoading(false)
+    } catch(err) {
+      console.log('실패')
+      setLoading(false)
+    }
   }
 
   useEffect(() => {
@@ -22,6 +31,7 @@ const ProductDetail = () => {
 
   return (
     <Container>
+      {loading === true? <Loading /> : (
       <Row className='detail'>
         <Col lg="6" className='img'>
           <img src={detail?.img} alt=''/>
@@ -45,6 +55,7 @@ const ProductDetail = () => {
           </div>
         </Col>
       </Row>
+      )}
     </Container>
   )
 }

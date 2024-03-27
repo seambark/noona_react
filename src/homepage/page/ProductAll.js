@@ -32,6 +32,7 @@ const ProductAll = () => {
 
     } catch(err) {
       console.log('실패')
+      setLoading(false)
     }
     
   }
