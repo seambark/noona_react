@@ -9,6 +9,8 @@ import WeatherAndGame from './page/WeatherAndGame';
 import IndexPage from './page/IndexPage';
 import { useEffect, useState } from 'react';
 import PrivateRoutes from './homepage/route/PrivateRoutes';
+import Counter from './redux_project/Counter';
+
 
 
 
@@ -38,6 +40,7 @@ function App() {
           <Route path='/h&m/login' element={<Login setAuthenticate={setAuthenticate}/>} />
           <Route path='/h&m/product/:id' element={<PrivateRoutes authenticate={authenticate}/>} />
         </Route>
+        <Route path='/counter' element={<Counter />}/>
       </Routes>
     </div>
   );
