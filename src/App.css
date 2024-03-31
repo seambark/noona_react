@@ -353,6 +353,13 @@ p {
 .counter_btn button svg {
     margin-right: 5px;
 }
+.counter_box .row:last-child .counter_btn {
+    margin-top: 10px;
+}
+/* .counter_box .row:last-child .counter_btn button{
+    background-color: #b4b5b5;
+    border-color: #b4b5b5;
+} */
 
 
 @media screen and (max-width: 768px) {

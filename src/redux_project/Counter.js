@@ -12,22 +12,29 @@ const Counter = () => {
     const dispatch = useDispatch();
     
 
-    const numberCheck = (name) => {
-        if(name === "DECREMENT" && countNum <= 0) {
-            alert('숫자는 0 이하로 감소할 수 없습니다.')
-        } else {
-            dispatch({type:name})
-            setActive(true)
-        }
+    const numberCheck = (name, num) => {
+        let payloadNum = num? num : 0;
+        dispatch({type:name,payload:{num : payloadNum}})
+        setActive(true)
     }
 
-    const increment = (e) => {
+    const increment = () => {
         numberCheck("INCREMENT")
         setIcon('+')
     }
 
-    const decrement = (e) => {
+    const decrement = () => {
         numberCheck("DECREMENT")
+        setIcon('-')
+    }
+
+    const increment_payload = () => {
+        numberCheck("INCREMENT_PAYLOAD", 5)
+        setIcon('+')
+    }
+
+    const decrement_payload = () => {
+        numberCheck("DECREMENT_PAYLOAD", 5)
         setIcon('-')
     }
 
@@ -49,11 +56,21 @@ const Counter = () => {
             </Row>
             <Row>
                 <Col className='counter_btn'>
-                    <Button type='button'variant="primary" size="lg" onMouseDown={(e) => check(e)} onClick={(e) => increment(e)}>
-                        <FontAwesomeIcon icon={faPlus} /> 증가
+                    <Button type='button'variant="primary" size="lg" onMouseDown={() => check()} onClick={() => increment()}>
+                        <FontAwesomeIcon icon={faPlus} /> 1
                     </Button>
-                    <Button type='button' variant="danger" size="lg" onMouseDown={(e) => check(e)} onClick={(e) => decrement(e)}>
-                        <FontAwesomeIcon icon={faMinus} /> 감소
+                    <Button type='button' variant="danger" size="lg" onMouseDown={() => check()} onClick={() => decrement()}>
+                        <FontAwesomeIcon icon={faMinus} /> 1
+                    </Button>
+                </Col>
+            </Row>
+            <Row>
+                <Col className='counter_btn'>
+                    <Button type='button'variant="primary" size="lg" onMouseDown={() => check()} onClick={() => increment_payload()}>
+                        <FontAwesomeIcon icon={faPlus} /> 5
+                    </Button>
+                    <Button type='button'variant="danger" size="lg" onMouseDown={() => check()} onClick={() => decrement_payload()}>
+                        <FontAwesomeIcon icon={faMinus} /> 5
                     </Button>
                 </Col>
             </Row>
