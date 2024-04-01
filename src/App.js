@@ -10,6 +10,7 @@ import IndexPage from './page/IndexPage';
 import { useEffect, useState } from 'react';
 import PrivateRoutes from './homepage/route/PrivateRoutes';
 import Counter from './redux_project/Counter';
+import PhoneBook from './phone_book/PhoneBook';
 
 
 
@@ -41,6 +42,7 @@ function App() {
           <Route path='/h&m/product/:id' element={<PrivateRoutes authenticate={authenticate}/>} />
         </Route>
         <Route path='/counter' element={<Counter />}/>
+        <Route path='/phone-book' element={<PhoneBook />}/>
       </Routes>
     </div>
   );

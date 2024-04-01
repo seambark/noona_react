@@ -360,7 +360,93 @@ p {
     background-color: #b4b5b5;
     border-color: #b4b5b5;
 } */
-
+.phone_book {
+    height: 100%;
+    padding: 45px 15px 30px;
+    background-color: #edf2f5;
+}
+.phone_book .container {
+    height: calc(100% - 100px);
+}
+.phone_book .container .row {
+    height: 100%;
+}
+.phone_book .left { 
+    padding-right: 25px;
+}
+.phone_book .right { 
+    padding-left: 25px;
+    border-left: 2px solid #ddd;
+}
+.phone_book button {
+    background-color: #93a1be;
+    border-color: #93a1be;
+}
+.phone_book button:hover {
+    background-color: #7483a0;
+    border-color: #7483a0;
+}
+.phone_book .title {
+    margin-bottom: 30px;
+    text-align: center;
+}
+.phone_book .search_area {
+    padding: 28px 0 20px;
+    border-bottom: 1px solid #ddd;
+}
+.phone_book .search_area .row div:last-child {
+    padding: 0;
+}
+.contact_list .total {
+    margin-top: 20px;
+    text-align: right;
+}
+.contact_list .total b {
+    font-size: 17px;
+}
+.contact_list ul {
+    margin-top: 20px;
+    padding: 0;
+}
+.contact_list li {
+    margin-bottom: 10px;
+}
+.contact_list li:nth-child(even) .contact {
+    background-color: #cfd6e5;
+}
+.contact_list .contact {
+    display: flex;
+    overflow: hidden;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #e2e2e2;
+    /* box-shadow: 4px 4px 10px rgba(0,0,0,0.2); */
+}
+.contact_list .contact .img {
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+}
+.contact_list .contact .img svg {
+    font-size: 40px;
+    color: #e0e0e0;
+}
+.contact_list .contact .info {
+    padding: 20px;
+    flex-grow: 1;
+}
+.contact_list .contact .info .name {
+    border-bottom: 1px solid #fff;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+    font-size: 20px;
+    font-weight: bold;
+}
+.align_right {
+    text-align: right;
+}
 
 @media screen and (max-width: 768px) {
     .main_title {
@@ -389,6 +475,30 @@ p {
     }
     .weather_area .control {
         margin-top: 20px;
+    }
+    .phone_book .container > .row {
+        flex-direction: column;
+        height: auto;
+    }
+    .phone_book .left ,
+    .phone_book .right {
+        width: 100%;
+    }
+    .phone_book .left { 
+        padding: 0 0 25px;
+    }
+    .phone_book .right { 
+        padding-left: 0;
+        border-left: inherit;
+        border-top: 2px solid #ddd;
+    }
+    .phone_book .search_area .row div:first-child {
+        flex-grow: 1;
+        width: auto;
+    }
+    .phone_book .search_area .row div:last-child {
+        flex-shrink: 1;
+        width: 60px;
     }
 }
 
