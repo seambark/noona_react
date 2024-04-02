@@ -7,7 +7,7 @@ import Login from './homepage/page/Login';
 import Main from './homepage/Main';
 import WeatherAndGame from './page/WeatherAndGame';
 import IndexPage from './page/IndexPage';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import PrivateRoutes from './homepage/route/PrivateRoutes';
 import Counter from './redux_project/Counter';
 import PhoneBook from './phone_book/PhoneBook';
@@ -23,10 +23,9 @@ function App() {
   // 4. 버튼을 클릭하면 컴퓨터 아이템은 랜덤하게 선택이 된다.
   // 5. 3번 4번의 아이템을 가지고 누가 이겼는지 승패를 나눈다.
   // 6. 박스 테두기가 결과에 따라 색이 변한다. 기면 빨간색, 이기면 초록색, 비기면 검정색이 보인다.
-  const [authenticate, setAuthenticate] = useState(false);
 
   useEffect(() => {
-  },[authenticate])
+  },[])
 
   return (
     <div className='wrap'>
@@ -36,10 +35,10 @@ function App() {
           <Route path='/weather&game/weather' element={<Weather />}/>
           <Route path='/weather&game/RockPaperScissor' element={<RockPaperScissor />}/>
         </Route>
-        <Route path='/h&m' element={<Main authenticate={authenticate} setAuthenticate={setAuthenticate}/>}>
+        <Route path='/h&m' element={<Main />}>
           <Route path='/h&m/productAll' element={<ProductAll />}/>
-          <Route path='/h&m/login' element={<Login setAuthenticate={setAuthenticate}/>} />
-          <Route path='/h&m/product/:id' element={<PrivateRoutes authenticate={authenticate}/>} />
+          <Route path='/h&m/login' element={<Login />} />
+          <Route path='/h&m/product/:id' element={<PrivateRoutes/>} />
         </Route>
         <Route path='/counter' element={<Counter />}/>
         <Route path='/phone-book' element={<PhoneBook />}/>

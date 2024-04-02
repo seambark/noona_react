@@ -4,7 +4,7 @@ let initialState={
 
 function contact(state=initialState,action) {
     const {type, payload} = action;
-    console.log(action)
+
     switch(type) {
         case "ADD_CONTACT":
             return  {

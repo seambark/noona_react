@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import ProductCard from '../component/ProductCard';
 import { Col, Container, Row } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useSearchParams } from 'react-router-dom';
 import Loading from '../../component/Loading';
+import {productAction} from '../../redux/actions/productAction';
+import { useDispatch, useSelector } from 'react-redux';
 
 // 1. 전체상품페이지, 로그인, 상품상세페이지
 // 1-1. 네비게이션 바
@@ -15,26 +17,16 @@ import Loading from '../../component/Loading';
 // 7. 상품을 검색할 수 있다.
 
 const ProductAll = () => {
-  const [productList, setProductList] = useState([]);
+  const productList = useSelector(state=>state.product.productList);
   // eslint-disable-next-line
   const [query, setQuery] = useSearchParams();
-  const [loading, setLoading] = useState(false);
+  const loading = useSelector(state=>state.product.loading);
+  const dispatch = useDispatch();
 
-  const getProducts = async() => {
-    setLoading(true)
+  const getProducts = () => {
     let searchQuery = query.get('q')||'';
-    let url = `https://my-json-server.typicode.com/seambark/noona_react/products?q=${searchQuery}`;
-    try {
-      let response = await fetch(url);
-      let data = await response.json();
-      setProductList(data)
-      setLoading(false)
 
-    } catch(err) {
-      console.log('실패')
-      setLoading(false)
-    }
-    
+    dispatch(productAction.getProducts(searchQuery))
   }
 
   useEffect(() => {
@@ -45,8 +37,8 @@ const ProductAll = () => {
   return (
     <Container>
       <Row>
-      {productList.length > 0 ? (
-        productList.map((menu, idx) => (
+      {productList?.length > 0 ? (
+        productList?.map((menu, idx) => (
         <Col lg={3} key={idx}>
           <ProductCard item={menu}/>
         </Col>

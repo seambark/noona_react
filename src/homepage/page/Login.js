@@ -1,14 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Form } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { authenticateAction } from '../../redux/actions/authenticateAction';
 
-const Login = ({setAuthenticate}) => {
+const Login = () => {
+  const [id, setId] = useState('');
+  const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const loginUser = (e) => {
     e.preventDefault();
-    setAuthenticate(true);
-    
+    dispatch(authenticateAction.login(id,password))
     navigate('/h&m/productAll')
   };
 
@@ -17,9 +21,9 @@ const Login = ({setAuthenticate}) => {
       <Form onSubmit={(e) => loginUser(e)} className='d-grid'>
         <Form.Group className="mb-3" controlId="email">
           <Form.Label>Email address</Form.Label>
-          <Form.Control type="email" placeholder="name@example.com" />
+          <Form.Control type="email" placeholder="name@example.com" onChange={(e) => setId(e.target.value)}/>
         </Form.Group>
-        <Form.Group className="mb-4" placeholder="password">
+        <Form.Group className="mb-4" placeholder="password" onChange={(e) => setPassword(e.target.value)}>
           <Form.Label>Password</Form.Label>
           <Form.Control type='password'/>
         </Form.Group>

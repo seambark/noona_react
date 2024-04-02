@@ -1,27 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { Container, Row, Col, Form } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Loading from '../../component/Loading';
+import { useDispatch, useSelector } from 'react-redux';
+import { productAction } from '../../redux/actions/productAction';
 
 const ProductDetail = () => {
   let {id} = useParams();
-  const [detail, setDetail] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const detail = useSelector(state=>state.product.productDetail);
+  const loading = useSelector(state=>state.product.loading);
+  const dispatch = useDispatch();
 
-  const getProductDetail = async() => {
-    setLoading(true)
-    let url = `https://my-json-server.typicode.com/seambark/noona_react/products/${id}`;
-    
-    try {
-      let response = await fetch(url);
-      let data = await response.json();
-      setDetail(data)
-      setLoading(false)
-    } catch(err) {
-      console.log('실패')
-      setLoading(false)
-    }
+  const getProductDetail = () => {
+    dispatch(productAction.getProductDetail(id))
   }
 
   useEffect(() => {
@@ -32,6 +24,7 @@ const ProductDetail = () => {
   return (
     <Container>
       {loading === true? <Loading /> : (
+        
       <Row className='detail'>
         <Col lg="6" className='img'>
           <img src={detail?.img} alt=''/>
@@ -44,9 +37,9 @@ const ProductDetail = () => {
           <h2 className="title mb-3">{detail?.title}</h2>
           <p className="price mb-3">₩ {detail?.price}</p>
           <Form.Select className="mb-3" >
-            {detail?.size.map((size => {
-              return (<option>{size}</option>)
-            }))}
+            {detail?.size.map((size,idx) => {
+              return (<option key={idx}>{size}</option>)
+            })}
           </Form.Select>
           <div className='button_box'>
             <Button variant="danger" type="button">

@@ -2,11 +2,11 @@ import Navbar from './component/Navbar';
 import { Outlet } from 'react-router-dom';
 import '../assets/css/homepage.css';
 
-const Main = ({authenticate, setAuthenticate}) => {
+const Main = () => {
 
   return (
     <div className='homepage_wrap'>
-      <Navbar authenticate={authenticate} setAuthenticate={setAuthenticate}/>
+      <Navbar/>
       <div className='section'>
         <Outlet />
       </div>

@@ -4,12 +4,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
 import { faMagnifyingGlass, faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
 import logoImg from '../../assets/images/hm-logo.png';
+import { useDispatch, useSelector } from 'react-redux';
+import { authenticateAction } from '../../redux/actions/authenticateAction';
 
-const Navbar = ({authenticate, setAuthenticate}) => {
+const Navbar = () => {
     const menuList = ['여성','Divided','남성','신생아/유아','아동','H&M HOME','Sale','지속가능성'];
     const [menuActive, setMenuActive] = useState(false);
     const [searchActive, setSearchActive] = useState(false);
     const navigate = useNavigate();
+    const auth = useSelector(state=>state.auth.authenticate);
+    const dispatch = useDispatch();
 
     const menuClick = () => {
         menuActive === false ? setMenuActive(true) : setMenuActive(false);
@@ -26,13 +30,13 @@ const Navbar = ({authenticate, setAuthenticate}) => {
         }
     }
     const logoutClick = () => {
-        setAuthenticate(false)
+        dispatch(authenticateAction.logout())
     }
 
     return (
     <header className='header'>
         <div className='unit_area'>
-            {authenticate === false?(
+            {auth === false?(
                 <Link to='/h&m/login' className='login_btn'>
                     <FontAwesomeIcon icon={faUser} />
                     <span>로그인</span>

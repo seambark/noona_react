@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 
 const Counter = () => {
-    const countNum = useSelector(state => state.reducer.count);
+    const countNum = useSelector(state => state.counter.count);
     const [active, setActive] = useState(false);
     const [icon, setIcon] = useState('');
     const dispatch = useDispatch();
