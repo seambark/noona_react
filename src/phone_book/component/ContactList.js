@@ -9,7 +9,7 @@ const ContactList = ({addList, setAddList}) => {
   const [list, setList] = useState([])
 
   const listFilter = () => {
-    let searchList = contactList.filter((item)=> {
+    let searchList = contactList?.filter((item)=> {
       return item.name === search
     });
     if(addList === true){
@@ -32,12 +32,12 @@ const ContactList = ({addList, setAddList}) => {
         <SearchBox setSearch={setSearch}/>
         <div className='contact_list'>
           <div className='total'>
-            <span>총 개수 : <b>{list.length}</b></span>
+            <span>총 개수 : <b>{list?.length}</b></span>
           </div>
           <ul>
             {
-              list.length > 0 ?
-              list.map((item, key) => {
+              list?.length > 0 ?
+              list?.map((item, key) => {
                 return <ContactItem item={item} key={key}/>
               }) : <li className='no_data'>{search && <b>{search} </b>}연락처 목록이 없습니다.</li>
             }

@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import { Container, Col, Row } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
+import { addIncrement, addDecrement, addIncrementPayload, addDecrementPayload } from '../redux/reducer/counterSlice';
 
 const Counter = () => {
     const countNum = useSelector(state => state.counter.count);
@@ -14,27 +15,27 @@ const Counter = () => {
 
     const numberCheck = (name, num) => {
         let payloadNum = num? num : 0;
-        dispatch({type:name,payload:{num : payloadNum}})
+        dispatch(name(payloadNum))
         setActive(true)
     }
 
     const increment = () => {
-        numberCheck("INCREMENT")
+        numberCheck(addIncrement)
         setIcon('+')
     }
 
     const decrement = () => {
-        numberCheck("DECREMENT")
+        numberCheck(addDecrement)
         setIcon('-')
     }
 
     const increment_payload = () => {
-        numberCheck("INCREMENT_PAYLOAD", 5)
+        numberCheck(addIncrementPayload, 5)
         setIcon('+')
     }
 
     const decrement_payload = () => {
-        numberCheck("DECREMENT_PAYLOAD", 5)
+        numberCheck(addDecrementPayload, 5)
         setIcon('-')
     }
 

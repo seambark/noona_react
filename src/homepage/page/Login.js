@@ -3,7 +3,7 @@ import { Form } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { authenticateAction } from '../../redux/actions/authenticateAction';
+import { login } from '../../redux/reducer/authenticateSlice';
 
 const Login = () => {
   const [id, setId] = useState('');
@@ -12,7 +12,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const loginUser = (e) => {
     e.preventDefault();
-    dispatch(authenticateAction.login(id,password))
+    dispatch(login(id,password))
     navigate('/h&m/productAll')
   };
 

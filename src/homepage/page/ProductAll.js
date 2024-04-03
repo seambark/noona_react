@@ -4,8 +4,8 @@ import { Col, Container, Row } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useSearchParams } from 'react-router-dom';
 import Loading from '../../component/Loading';
-import {productAction} from '../../redux/actions/productAction';
 import { useDispatch, useSelector } from 'react-redux';
+import { fetchProducts } from '../../redux/reducer/productSlice';
 
 // 1. 전체상품페이지, 로그인, 상품상세페이지
 // 1-1. 네비게이션 바
@@ -26,7 +26,7 @@ const ProductAll = () => {
   const getProducts = () => {
     let searchQuery = query.get('q')||'';
 
-    dispatch(productAction.getProducts(searchQuery))
+    dispatch(fetchProducts(searchQuery))
   }
 
   useEffect(() => {

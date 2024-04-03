@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useDispatch } from 'react-redux';
+import { addContect } from '../../redux/reducer/contactSlice';
 
 const ContactForm = ({setAddList}) => {
     const [name, setName] = useState('');
@@ -10,7 +11,7 @@ const ContactForm = ({setAddList}) => {
 
     const addContact = (e) => {
         e.preventDefault();
-        dispatch({type:"ADD_CONTACT",payload:{name, phoneNumber}})
+        dispatch(addContect({name, phoneNumber}))
         setAddList(true)
     }
 

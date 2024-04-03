@@ -5,7 +5,7 @@ import { faUser } from '@fortawesome/free-regular-svg-icons';
 import { faMagnifyingGlass, faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
 import logoImg from '../../assets/images/hm-logo.png';
 import { useDispatch, useSelector } from 'react-redux';
-import { authenticateAction } from '../../redux/actions/authenticateAction';
+import { logout } from '../../redux/reducer/authenticateSlice';
 
 const Navbar = () => {
     const menuList = ['여성','Divided','남성','신생아/유아','아동','H&M HOME','Sale','지속가능성'];
@@ -30,7 +30,7 @@ const Navbar = () => {
         }
     }
     const logoutClick = () => {
-        dispatch(authenticateAction.logout())
+        dispatch(logout())
     }
 
     return (
